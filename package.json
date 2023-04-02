@@ -1,0 +1,23 @@
+{
+  "name": "vitest-stylelint-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@davidwarrington/prettier-config": "^1.0.0",
+    "prettier": "^2.8.7",
+    "stylelint": "^15.4.0",
+    "vitest": "^0.29.8"
+  },
+  "peerDependencies": {
+    "stylelint": "^15.4.0",
+    "vitest": "^0.29.8"
+  }
+}
