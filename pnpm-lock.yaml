@@ -2,12 +2,14 @@ lockfileVersion: 5.4
 
 specifiers:
   '@davidwarrington/prettier-config': ^1.0.0
+  '@types/node': ^18.15.11
   prettier: ^2.8.7
   stylelint: ^15.4.0
   vitest: ^0.29.8
 
 devDependencies:
   '@davidwarrington/prettier-config': 1.0.0_prettier@2.8.7
+  '@types/node': 18.15.11
   prettier: 2.8.7
   stylelint: 15.4.0
   vitest: 0.29.8
