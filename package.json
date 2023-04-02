@@ -1,7 +1,7 @@
 {
   "name": "vitest-stylelint-utils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Utilities for testing Stylelint plugins with Vitest",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,14 +11,32 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "keywords": [
+    "stylelint",
+    "vitest"
+  ],
+  "author": {
+    "name": "David Warrington",
+    "url": "https://github.com/davidwarrington"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidwarrington/vitest-stylelint-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidwarrington/vitest-stylelint-utils/issues"
+  },
+  "homepage": "https://github.com/davidwarrington/vitest-stylelint-utils/#readme",
+  "license": "ISC",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
+    "prepublishOnly": "pnpm build",
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@davidwarrington/prettier-config": "^1.0.0",
     "@types/node": "^18.15.11",
