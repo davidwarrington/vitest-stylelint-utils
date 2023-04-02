@@ -1,6 +1,11 @@
 import util from 'node:util';
-import { lint, type LinterResult } from 'stylelint';
-import { describe, expect, it, type TestFunction } from 'vitest';
+import stylelint, { type LinterResult } from 'stylelint';
+import {
+  describe as vitestDescribe,
+  expect as vitestExpect,
+  it as vitestIt,
+  type TestFunction,
+} from 'vitest';
 
 export type TestCase = {
   /**
@@ -157,12 +162,20 @@ export type TestRule = (schema: TestSchema) => void;
 
 type GetTestRuleOptions = {
   plugins?: TestSchema['plugins'];
+
+  describe: typeof vitestDescribe;
+  expect: typeof vitestExpect;
+  it: typeof vitestIt;
 };
+
+const { lint } = stylelint;
 
 /**
  * Create a `testRule()` function with any specified plugins.
  */
 export function getTestRule(options: GetTestRuleOptions): TestRule {
+  const { describe, expect, it } = options;
+
   return function testRule(schema: TestSchema) {
     describe(`${schema.ruleName}`, () => {
       const stylelintConfig = {
@@ -205,6 +218,9 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
             expect(fixedCode).toBe(testCase.code);
           };
         },
+
+        describe,
+        it,
       });
 
       setupTestCases<RejectTestCase>({
@@ -251,7 +267,7 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
 
               Object.entries(expectedWarning).forEach(([key, value]) => {
                 if (value === undefined) {
-                  delete expectedWarning[key];
+                  delete expectedWarning[key as keyof typeof expectedWarning];
                 }
               });
 
@@ -306,6 +322,9 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
             });
           };
         },
+
+        describe,
+        it,
       });
     });
   };
@@ -316,12 +335,18 @@ interface SetupTestCasesOptions<T extends TestCase> {
   cases: T[] | undefined;
   schema: TestSchema;
   comparisons: (testCase: T) => TestFunction;
+
+  describe: typeof vitestDescribe;
+  it: typeof vitestIt;
 }
 function setupTestCases<T extends TestCase = TestCase>({
   name,
   cases,
   schema,
   comparisons,
+
+  describe,
+  it,
 }: SetupTestCasesOptions<T>) {
   if (cases && cases.length) {
     const testGroup = schema.only

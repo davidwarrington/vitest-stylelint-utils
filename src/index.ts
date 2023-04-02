@@ -1,1 +1,1 @@
-export { getTestRule } from './get-test-rule';
+export * from './get-test-rule';
