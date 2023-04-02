@@ -45,7 +45,7 @@ Optionally you can make it global to avoid rewriting setup boilerplate in multip
    import { defineConfig } from 'vitest/config';
 
    export default defineConfig({
-     tests: {
+     test: {
        setupFiles: ['./vitest.setup.ts'],
      },
    });
