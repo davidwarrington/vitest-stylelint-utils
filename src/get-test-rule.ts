@@ -1,5 +1,5 @@
 import util from 'node:util';
-import stylelint, { type LinterResult } from 'stylelint';
+import stylelint, { type Config, type LinterResult } from 'stylelint';
 import {
   describe as vitestDescribe,
   expect as vitestExpect,
@@ -124,7 +124,7 @@ export type TestSchema = {
    *
    * @see https://stylelint.io/user-guide/configure#plugins
    */
-  plugins?: string | string[];
+  plugins?: Exclude<Config['plugins'], undefined>;
 
   /**
    * Maps to Stylelint's `customSyntax` option.
