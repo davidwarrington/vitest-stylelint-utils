@@ -247,14 +247,14 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
               parseErrors: [],
             });
             expect(actualWarnings).toHaveLength(
-              testCase.warnings ? testCase.warnings.length : 1
+              testCase.warnings ? testCase.warnings.length : 1,
             );
 
             const warnings = testCase.warnings || [testCase];
             warnings.forEach((warning, index) => {
               expect(
                 warning.message,
-                'Expected "reject" test case to have a "message" property'
+                'Expected "reject" test case to have a "message" property',
               ).toBeDefined();
 
               const expectedWarning = {
@@ -286,7 +286,7 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
               !testCase.unfixable
             ) {
               throw new Error(
-                'If using { fix: true } in test schema, all reject cases must have { fixed: .. }'
+                'If using { fix: true } in test schema, all reject cases must have { fixed: .. }',
               );
             }
 
@@ -352,8 +352,8 @@ function setupTestCases<T extends TestCase = TestCase>({
     const testGroup = schema.only
       ? describe.only
       : schema.skip
-      ? describe.skip
-      : describe;
+        ? describe.skip
+        : describe;
 
     testGroup(`${name}`, () => {
       cases.forEach(testCase => {
@@ -364,7 +364,7 @@ function setupTestCases<T extends TestCase = TestCase>({
             describe(`${util.inspect(testCase.code)}`, () => {
               spec(
                 testCase.description || 'no description',
-                comparisons(testCase)
+                comparisons(testCase),
               );
             });
           });
