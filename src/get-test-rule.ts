@@ -297,16 +297,16 @@ export function getTestRule(options: GetTestRuleOptions): TestRule {
 
             const fixedCode = getOutputCss(outputAfterFix);
 
-            if (!testCase.unfixable) {
-              expect(fixedCode).toBe(testCase.fixed);
-              expect(fixedCode).not.toBe(testCase.code);
-            } else {
+            if (testCase.unfixable) {
               // can't fix
               if (testCase.fixed) {
                 expect(fixedCode).toBe(testCase.fixed);
               }
 
               expect(fixedCode).toBe(testCase.code);
+            } else {
+              expect(fixedCode).toBe(testCase.fixed);
+              expect(fixedCode).not.toBe(testCase.code);
             }
 
             // Checks whether only errors other than those fixed are reported
@@ -348,17 +348,33 @@ function setupTestCases<T extends TestCase = TestCase>({
   describe,
   it,
 }: SetupTestCasesOptions<T>) {
-  if (cases && cases.length) {
-    const testGroup = schema.only
-      ? describe.only
-      : schema.skip
-        ? describe.skip
-        : describe;
+  if (cases && cases.length > 0) {
+    const testGroup = (() => {
+      if (schema.only) {
+        return describe.only;
+      }
+
+      if (schema.skip) {
+        return describe.skip;
+      }
+
+      return describe;
+    })();
 
     testGroup(`${name}`, () => {
       cases.forEach(testCase => {
         if (testCase) {
-          const spec = testCase.only ? it.only : testCase.skip ? it.skip : it;
+          const spec = (() => {
+            if (testCase.only) {
+              return it.only;
+            }
+
+            if (testCase.skip) {
+              return it.skip;
+            }
+
+            return it;
+          })();
 
           describe(`${util.inspect(schema.config)}`, () => {
             describe(`${util.inspect(testCase.code)}`, () => {
