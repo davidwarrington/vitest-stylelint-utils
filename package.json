@@ -31,6 +31,7 @@
   "files": [
     "dist"
   ],
+  "packageManager": "pnpm@10.13.1",
   "scripts": {
     "build": "tsdown",
     "format": "prettier --write .",
