@@ -6,8 +6,6 @@ Currently this package is just a port of [jest-preset-stylelint](https://github.
 
 Unlike `jest-preset-stylelint` it doesn't add a `toHaveMessage` custom matcher to `expect`. If you'd like to have that matcher, copy [this code from `jest-preset-stylelint`](https://github.com/stylelint/jest-preset-stylelint/blob/main/getTestRule.js#L136-L150) and [follow these Vitest docs](https://vitest.dev/guide/extending-matchers.html) to extend the Vi namespace if you're using TypeScript.
 
-**Currently `describe`, `expect` and `it` must be passed to `getTestRule` as simply using Vitest as a peer dependency doesn't work.**
-
 ## Installation
 
 Install this alongside Stylelint and Vitest
@@ -32,7 +30,7 @@ Optionally you can make it global to avoid rewriting setup boilerplate in multip
    import { describe, expect, it } from 'vitest';
    import { getTestRule, type TestRule } from 'vitest-stylelint-utils';
 
-   global.testRule = getTestRule({ plugins: ['./'], describe, expect, it });
+   global.testRule = getTestRule({ plugins: ['./'] });
 
    declare global {
      var testRule: TestRule;
