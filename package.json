@@ -33,6 +33,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "typecheck": "tsc",
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
